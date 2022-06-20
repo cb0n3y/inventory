@@ -1,11 +1,19 @@
-[defaults]
-inventory = ./inventory/inventory
-remote_user = dkm
-forks = 10
-host_key_checking = true
+[control_node]
+localhost
 
-[privilege_escalation]
-become = true
-become_methode = sudo
-become_user = root
-become_ask_pass
+[webservers]
+dev-node01
+
+[dns_servers]
+dev-node0[3:4]
+
+[db_servers]
+dev-node02
+
+[rhel:children]
+webservers
+dns_servers
+control_node
+
+[deb:children]
+db_servers
